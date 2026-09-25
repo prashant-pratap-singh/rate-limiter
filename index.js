@@ -4,7 +4,13 @@ const ip=require('ip')
 const {hideip}=require("./helpers/hideip");
 const MAX_ALLOWED_REQ=5;
 const MAX_TIME=30_000;
-const ip_mapping={}
+
+const ip_mapping={};
+
+setInterval(()=>{
+    ip_mapping={};
+    console.log('resetting ip mapping');
+},MAX_TIME);
 
 app.use((req,res,next)=>{
     const my_ip=hideip(ip.address());
