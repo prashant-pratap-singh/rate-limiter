@@ -228,7 +228,6 @@ Possible extensions to the project:
 * Per-user rate limiting
 * API-key based limits
 * Route-specific limits
-* IP whitelisting
 * Redis Lua scripts for atomic operations
 * Rate-limit headers such as `X-RateLimit-Remaining`
 * Dockerized deployment
