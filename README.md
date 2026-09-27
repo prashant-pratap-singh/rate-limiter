@@ -234,4 +234,4 @@ Possible extensions to the project:
 * Redis-backed distributed rate limiting across multiple application instances
 
 ## License
-
+MIT LICENSE
