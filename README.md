@@ -161,7 +161,7 @@ rate-limiter/
 ### 1. Clone the repository
 
 ```bash
-git clone <https://github.com/prashant-pratap-singh/rate-limiter>
+git clone https://github.com/prashant-pratap-singh/rate-limiter
 cd rate-limiter
 ```
 
