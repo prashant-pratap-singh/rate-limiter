@@ -2,6 +2,8 @@ const express=require('express');
 const app=express();
 const ip=require('ip')
 const {hideip}=require("./helpers/hideip");
+
+const redis = require("./helpers/redis");
 const MAX_ALLOWED_REQ=5;
 const MAX_TIME=30_000;
 
@@ -12,11 +14,22 @@ const MAX_TIME=30_000;
 //     console.log('resetting ip mapping');
 // },MAX_TIME);
 
-app.use((req,res,next)=>{
+app.use(async(req,res,next)=>{
     const my_ip=hideip(ip.address());
 
+    //increment our ip request
+    const request = await redis.incr(my_ip)
+
     // ip_mapping[my_ip]=ip_mapping[my_ip]+1 ||1;
+    if(request === 1) {
+        await redis.expire(my_ip, MAX_TIME / 1000);
+    }
     // console.log(`received request no ${ip_mapping[my_ip]}from ${my_ip}`);
+    if(request > MAX_ALLOWED_REQ){
+        console.error('too many requests');
+        return res.status(429).send('too many request');
+    }
+
     // if(ip_mapping[my_ip]>MAX_ALLOWED_REQ){
     //     console.error('too many requests');
     //     return res.status(429).send('too many request');
