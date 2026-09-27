@@ -15,6 +15,10 @@ const MAX_TIME=30_000;
 // },MAX_TIME);
 
 app.use(async(req,res,next)=>{
+    //for whitelisting ip addresses
+    //if(my ip){
+    // next();}
+
     const my_ip=hideip(ip.address());
 
     //increment our ip request
